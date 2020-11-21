@@ -13,31 +13,11 @@ std::map<int, Product> Products::searchProductInfo(const prodInfoType info, Prod
         }
         return ret;
     }
-    
-    bool found = false;
     for(auto const& itProd : _prodData){
-        // Use info to get the right type to cast when compare
-        // Stack all case with same data type into one
-
-        switch(info){
-        case SupplierID:
-        case CategoryID:
-            found = std::get<int>(itProd.second.at(info)) 
-                    == std::get<int>(searchValue.at(info));
-            break;
-        case Unit:
-        case Name:
-            found = std::get<std::string>(itProd.second.at(info)) 
-                    == std::get<std::string>(searchValue.at(info));
-            break;
-        case Price:
-            found = std::get<double>(itProd.second.at(info)) 
-                    == std::get<double>(searchValue.at(info));
-            break;
-        default:
-            break;
-        }
-        if(found){
+        // Use info to get the right type in Product
+        // variant will auto compare if both has same type index
+        // TODO: rewite it to use std accumulate
+        if(itProd.second.at(info) == searchValue.at(info)){
             ret[itProd.first] = itProd.second;
         }
     }
