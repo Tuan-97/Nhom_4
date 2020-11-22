@@ -19,15 +19,18 @@
 template<typename Row, typename Props, typename prpValue>
 class Table {
     PropList<Props>         _PropsList;         // List of Props each Props is corresponding to a PropDetail Object
-    PropPtrList<Props>      _ForeignPropsList   // List of Pointer to Props that is set to be Foreign Key
+    PropPtrList<Props>      _ForeignPropsList;   // List of Pointer to Props that is set to be Foreign Key
+    std::map<Props, unqFrgKeyValue> _FrnUnqValuesList;   // list of unique foreign key value;
     const Props             _Primary;           // Unique key used to distinguise each row, assume an int;
     std::map<int, std::map<Props, prpValue>>    _Data;
 public:
     Table(PropList<Props>, int);       // The List of Props and index of Primary Key in the List;
 /*  some function that return info about table, may implement if possible*/
     PropDetail getPropDetail(Prop);         // get detail about specific props
+    const unqFrgKeyValue& getUnqValByFrgProp(Props);
     PropsList<Props> listProps();           // list all props;
     int getNoRow();                         // Number of Row;
+
 /*========================================================================*/
     std::map<int, std::map<Props, prpValue>> searchInfo(Props, std::map<Props, prpValue>);
     int addRow(std::map<Props, prpValue>);
