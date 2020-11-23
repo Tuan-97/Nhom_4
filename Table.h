@@ -16,7 +16,7 @@
     addRow = add new entity to the database
 */
 
-template<typename Row, typename Props, typename prpValue>
+template<typename Props, typename prpValue>
 class Table {
     PropList<Props>         _PropsList;         // List of Props each Props is corresponding to a PropDetail Object
     PropPtrList<Props>      _ForeignPropsList;   // List of Pointer to Props that is set to be Foreign Key
@@ -34,16 +34,18 @@ public:
 /*========================================================================*/
     std::map<int, std::map<Props, prpValue>> searchInfo(Props, std::map<Props, prpValue>);
     int addRow(std::map<Props, prpValue>);
+    const PropPtrList<Props>& getFrgList()  const   // return _ForeignPropList;
+    const unqFrgKeyValue& getUnqOfProp(Props) const // retrieve value from _FrnUnqValuesList, Props must be foreign;
 };
 
-template<typename Row, typename Props, typename prpValue>
-Table<Row, Props, prpValue>::Table(PropList<Props> List, int PrIndx)
+template<typename Props, typename prpValue>
+Table<Props, prpValue>::Table(PropList<Props> List, int PrIndx)
     : _PropsList(List), _Primary(_PropsList[PrIndx].Type){
 
 };
 
-template<typename Row, typename Props, typename prpValue>
-std::map<int, std::map<Props, prpValue>> Table<Row, Props, prpValue>::searchInfo(Props info, std::map<Props, prpValue> searchValue) {
+template<typename Props, typename prpValue>
+std::map<int, std::map<Props, prpValue>> Table<Props, prpValue>::searchInfo(Props info, std::map<Props, prpValue> searchValue) {
 
     std::map<int, std::map<Props, Type>> ret;
     ret.clear();
@@ -63,8 +65,8 @@ std::map<int, std::map<Props, prpValue>> Table<Row, Props, prpValue>::searchInfo
     return ret;
 };
 
-template<typename Row, typename Props, typename prpValue>
-int Table<Row, Props, prpValue>::addRow(std::map<Props, prpValue> newRow) {
+template<typename Props, typename prpValue>
+int Table<Props, prpValue>::addRow(std::map<Props, prpValue> newRow) {
     if(!seachInfo(_Primary, newRow).empty()) {
         return 1;
     }
@@ -73,4 +75,30 @@ int Table<Row, Props, prpValue>::addRow(std::map<Props, prpValue> newRow) {
 
 };
 
+/* 
+Description: Class which supply data to Table constructor.
 
+A table need to have the list of column and detail, constraints come with it. The constraint
+is requirement that value must fit certain type or its possible value must come from other 
+table or all row/entity must be distinct, i.e unique .There is other custom constraint such 
+as value must belong to a certain set , ex [10, -10] but such thing is not considered in this 
+case
+
+Object of this class is responsible for management of those Data
+It also 
+*/
+template<typename Props, typename prpValue>
+struct TableInitData{
+    /*==============Getter Methots==================*/
+    const PropList<Props>& getDetailList();         // return _DetailList;
+    const PropPtrList<Props>& getFrgProps();        // return _ForeignPropsList
+    /*==============================================*/
+    void addNewProps(Props, PropDetail<Props>);     // addNewProps to _DetailList;
+    void removeProps(Props);
+    void updateDetail(Props, PropDetai);
+    
+private:
+    PropList<Props> _DetailList;
+    PropPtrList<Props> _ForeignPropsList
+    PropPtrList<Props> gatherForeignProps();        // construct a List (map) of Foreign Key from _DetailList
+};

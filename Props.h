@@ -1,10 +1,12 @@
 #include "Common.h"
 
+enum    IntrinsicType{UINT, INT, STR, UDOUBLE, DOUBLE , DATE, BOOL};
+typedef std::variant<unsigned int, int, std::string, double, time_t, bool> TypeVariant; 
 typedef std::vector<TypeVariant> unqFrgKeyValue;     // Currently can't think of anything better than vector
 /* Props to use inside Table*/
 // Describe Prop's General Detail
-enum    IntrinsicType{UINT, INT, STR, UDOUBLE, DOUBLE , DATE, BOOL};
-typedef std::variant<unsigned int, int, std::string, double, time_t, bool> TypeVariant; 
+
+
 
 struct gnrDetail{
     std::string About;      // what props represent
@@ -19,7 +21,6 @@ struct gnrDetail{
 
 template<typename prpType> 
 class PropDetail{
-
 public:
     PropDetail(prpType, gnrDetail);
     const gnrDetail GeneralDetail;      // General Detail 
@@ -51,7 +52,10 @@ public:
     const Foreign* getFrgDetail() const;
 };
 
-
+/*  When a table declare a Props is Foreign and not the Parent, it must know
+    what IntrinsicType and possible value it allow to use for that type, the
+    system/business model dictate this and must handle this;
+*/
 class Foreign{  //use inside Constraint if props is Foreign Key;
     IntrinsicType                   ParentType;         // underlying Type that Parent use
     bool                            isParent;           // is Table parent Table;
