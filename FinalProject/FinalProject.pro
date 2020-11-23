@@ -25,8 +25,10 @@ SOURCES += \
     Class/shipper.cpp \
     Class/soldproduct.cpp \
     Class/supplier.cpp \
+    date.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    update_database.cpp
 
 HEADERS += \
     Class/categories.h \
@@ -39,7 +41,9 @@ HEADERS += \
     Class/soldproduct.h \
     Class/supplier.h \
     Extern_Variables.h \
-    mainwindow.h
+    date.h \
+    mainwindow.h \
+    update_database.h
 
 FORMS += \
     mainwindow.ui
