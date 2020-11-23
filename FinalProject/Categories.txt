@@ -1,0 +1,8 @@
+1 Beverages Soft_drinks _coffees _teas _beers _and_ales
+2 Condiments Sweet_and_savory_sauces _relishes _spreads _and_seasonings
+3 Confections Desserts _candies _and_sweet_breads
+4 Dairy_Products Cheeses
+5 Grains/Cereals Breads _crackers _pasta _and_cereal
+6 Meat/Poultry Prepared_meats
+7 Produce Dried_fruit_and_bean_curd
+8 Seafood Seaweed_and_fish
