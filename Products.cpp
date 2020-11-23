@@ -27,7 +27,7 @@ std::map<int, Product> Products::searchProductInfo(const prodInfoType info, Prod
 int Products::addProduct(Product newProd){ // Return 0 if no error
     
     // check if product already exist by product ID, use existing function to check
-    if(searchProductInfo(ProductID ,newProd).empty()){
+    if(!searchProductInfo(ProductID ,newProd).empty()){
        return 1; 
     }
     // Check for data requirement i.e name not blank, unit not bank, etc;
