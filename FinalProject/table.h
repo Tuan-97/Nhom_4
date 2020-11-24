@@ -18,12 +18,13 @@ public:
                                                                                 // May have function to make closed set an open set
                                                                                 // There is no clopen set
 protected:
+    TableHelper         _Helper;
     QString             _Name;          // Table Name;
     TableData           _Data;          // Data get from database
     QString             _PrmField;      // Name of column that is set as Primary
     //PrimaryValueList    _PmrValues;
     TableInfo           _Info;          // Info about each columns of Table;
-    TableHelper         _Helper;
+
 
 };
 

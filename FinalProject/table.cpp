@@ -32,5 +32,10 @@ TableData Table::filterByRange(QString Col, QVariant Lower, QVariant Upper) {
 
 Table::Table(QString Name)
     : _Name(Name), _Helper(Name), _Data(_Helper.getFullData()),
-      _Info(TableHelper::getInfo(Name)){};
+      _Info(TableHelper::getInfo(Name))
+{
+#ifdef DEBUG
+    qDebug() << "Table constructor run"
+#endif
+};
 
