@@ -1,8 +1,9 @@
 #include "TableHelper.h"
 
 TableHelper::TableHelper(QString ref)
-    : _Name(ref)
+    : _Name(ref), _Info(TableHelper::getInfo(ref)), _FieldName(setFieldNameFromInfo())
 {
+    setFieldNameFromInfo();
 
 };
 
@@ -88,12 +89,15 @@ TableData TableHelper::filterByValue(QString Col, QVariant Value){
     TableData data;
     QSqlQuery qry;
     prepareSelectQuery(qry, Col, Value);    // prepare query;
-
+    qry.exec();
     Row r;
+    //qDebug() << qry.isValid();
     while(qry.next()){
+
         r.clear();
         for(auto i = 0; i < int(_FieldName.size()); i++){
             r[_FieldName[i]] = qry.value(i);
+            //qDebug() << QString(_FieldName[i] + " " + qry.value(i).toString() );
         }
         data[qry.value(0).toInt()] = r;
     }
@@ -133,11 +137,14 @@ TableInfo TableHelper::getInfo(QString TableName){
 void TableHelper::prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Value){
     // Clear a String in format " COL1, COL2, COL3, ..."
     QString colList = "";
+
     for(auto i = _FieldName.begin(); i !=_FieldName.end(); ++i){
         colList += QString(" %1,").arg(*i);
     }
     colList.chop(1); // remove the last , letter
-    qry.prepare(QString("SELECT %1 FROM %2 WHERE %3 = : ?").arg(colList, _Name, Col));
+    //qDebug() << QString("SELECT %1 FROM %2 WHERE %3 = ?").arg(colList, _Name, Col);
+
+    qry.prepare(QString("SELECT %1 FROM %2 WHERE %3 = ?").arg(colList, _Name, Col));
     switch (checkType(_Info[Col][0].toString())) { // convert to true type;
     case INT:
         qry.bindValue(0, Value.toInt());
@@ -189,12 +196,13 @@ void TableHelper::prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Lower
     }
 };
 
-void TableHelper::setFieldNameFromInfo(){
-    _FieldName.clear();
-    std::vector<QString> FieldName;
+std::vector<QString> TableHelper::setFieldNameFromInfo(){
+    std::vector<QString> fn;
+    fn.clear();
     for(auto i = _Info.begin(); i!= _Info.end(); i++){ // build the key list for table data;
-        _FieldName.push_back(i.key());
+        fn.push_back(i.key());
     }
+    return fn;
 }
 
 TableData TableHelper::getFullData(){

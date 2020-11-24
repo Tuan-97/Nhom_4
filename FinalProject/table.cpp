@@ -1,5 +1,5 @@
 #include "table.h"
-
+#include <QDebug>
 int Table::insertRow(Row& newRow){
     _Helper.Insert(newRow);
     _Data[newRow[_PrmField].toInt()] = newRow;
@@ -24,6 +24,7 @@ const QString& Table::getTableName(){
 };
 
 TableData Table::filterByValue(QString Col, QVariant Value) {
+
     return _Helper.filterByValue(Col, Value);
 }
 TableData Table::filterByRange(QString Col, QVariant Lower, QVariant Upper) {
@@ -31,11 +32,8 @@ TableData Table::filterByRange(QString Col, QVariant Lower, QVariant Upper) {
 };
 
 Table::Table(QString Name)
-    : _Name(Name), _Helper(Name), _Data(_Helper.getFullData()),
+    : _Helper(Name), _Name(Name), _Data(_Helper.getFullData()),
       _Info(TableHelper::getInfo(Name))
 {
-#ifdef DEBUG
-    qDebug() << "Table constructor run"
-#endif
 };
 

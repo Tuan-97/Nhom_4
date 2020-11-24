@@ -22,7 +22,6 @@ protected:
     QString             _Name;          // Table Name;
     TableData           _Data;          // Data get from database
     QString             _PrmField;      // Name of column that is set as Primary
-    //PrimaryValueList    _PmrValues;
     TableInfo           _Info;          // Info about each columns of Table;
 
 

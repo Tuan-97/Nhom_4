@@ -7,7 +7,7 @@
 QString quoteSql(const QString&);
 class TableHelper
 {
-QString& _Name;         // associate table name
+QString _Name;         // associate table name
 QString _PrimaryCol;    // name of column set as primary key
 
 // TODO: set _PrimaryCol if possible;
@@ -15,7 +15,7 @@ TableInfo _Info;        // info about table;
 bool owned;
 
 std::vector<QString> _FieldName;
-void setFieldNameFromInfo();    // use to set _FieldName;
+std::vector<QString> setFieldNameFromInfo();    // use to set _FieldName;
 //void getFilterData(QSqlQuery& qry); // execute data from prepared query and get data from it;
 void prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Value);
 void prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Lower, QVariant Upper);
