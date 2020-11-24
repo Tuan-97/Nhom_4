@@ -16,47 +16,27 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
-    Class/categories.cpp \
-    Class/customer.cpp \
-    Class/employees.cpp \
-    Class/order.cpp \
-    Class/orderdetails.cpp \
-    Class/products.cpp \
-    Class/shipper.cpp \
     Class/soldproduct.cpp \
-    Class/supplier.cpp \
-<<<<<<< HEAD
-    TableManagement.cpp \
-    main.cpp \
-    mainwindow.cpp \
-    table.cpp
-=======
+    ProceduceCustomer.cpp \
+    TableHelper.cpp \
+    Util.cpp \
     date.cpp \
     main.cpp \
     mainwindow.cpp \
-    update_database.cpp
->>>>>>> 5af8377f30fd3d27315d9902109d8ab8ae646be1
+    proceduceproduct.cpp \
+    table.cpp
 
 HEADERS += \
-    Class/categories.h \
-    Class/customer.h \
-    Class/employees.h \
-    Class/order.h \
-    Class/orderdetails.h \
-    Class/products.h \
-    Class/shipper.h \
     Class/soldproduct.h \
-    Class/supplier.h \
+    CommonDef.h \
     Extern_Variables.h \
-<<<<<<< HEAD
-    TableManagement.h \
-    mainwindow.h \
-    table.h
-=======
+    ProceduceCustomer.h \
+    TableHelper.h \
+    Util.h \
     date.h \
     mainwindow.h \
-    update_database.h
->>>>>>> 5af8377f30fd3d27315d9902109d8ab8ae646be1
+    proceduceproduct.h \
+    table.h
 
 FORMS += \
     mainwindow.ui

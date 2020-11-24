@@ -4,14 +4,7 @@
 #include <map>
 
 #include "Class/soldproduct.h"
-/*#include "Class/categories.h"
-#include "Class/customer.h"
-#include "Class/employees.h"
-#include "Class/order.h"
-#include "Class/orderdetails.h"
-#include "Class/products.h"
-#include "Class/shipper.h"
-#include "Class/supplier.h"*/
+#include "table.h"
 
 /*
  *  Purpose: Define Variables out side method in mainwindow.cpp
