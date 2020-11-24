@@ -8,8 +8,11 @@
 #include <QString>
 #include <vector>
 #include <map>
+#include "TableHelper.h"
+
 
 class Table;
+class TableHelper;
 typedef QMap<QString, QVariant>     Row;
 typedef QMap<unsigned int, Row>     TableData;          //  just use int;
 typedef QSet<unsigned int>          PrimaryValueList;
@@ -22,9 +25,7 @@ class Table : public QObject
 public:
 
     explicit Table(QObject *parent = nullptr);
-    Table(QString, TableData, TableInfo);               // by order: _TableName, _Data, TableInfo;
-    virtual QSet<QVariant>& getPrimaryKeys() const;     // return a set of all Primary key;
-    virtual ~Table() = 0;
+    Table(QString);
     virtual const QString& getTableName();              // return _TableName;
     virtual int insertRow(Row&);                        // add New Row to Table;
     virtual int removeRow(int);
@@ -33,15 +34,14 @@ public:
     virtual const TableData& filterByRange(QString, QVariant, QVariant) const;  // WHERE QString >= LowerBound AND QString <= Upper Bound
                                                                                 // May have function to make closed set an open set
                                                                                 // There is no clopen set
-
 signals:
 protected:
-    QString             _Name;
-    TableData           _Data;
-    QString             _PrmField;
-    PrimaryValueList    _PmrValues;
-    TableInfo           _Info;
-    static QMap<QString, int> valueType;
+    QString             _Name;          // Table Name;
+    TableData           _Data;          // Data get from database
+    QString             _PrmField;      // Name of column that is set as Primary
+    //PrimaryValueList    _PmrValues;
+    TableInfo           _Info;          // Info about each columns of Table;
+    TableHelper         _Helper;
 
 };
 
