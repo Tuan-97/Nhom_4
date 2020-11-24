@@ -1,4 +1,4 @@
-QT       += core gui
+QT       += core gui sql
 
 greaterThan(QT_MAJOR_VERSION, 4): QT += widgets
 
@@ -25,8 +25,10 @@ SOURCES += \
     Class/shipper.cpp \
     Class/soldproduct.cpp \
     Class/supplier.cpp \
+    TableManagement.cpp \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    table.cpp
 
 HEADERS += \
     Class/categories.h \
@@ -39,7 +41,9 @@ HEADERS += \
     Class/soldproduct.h \
     Class/supplier.h \
     Extern_Variables.h \
-    mainwindow.h
+    TableManagement.h \
+    mainwindow.h \
+    table.h
 
 FORMS += \
     mainwindow.ui

@@ -1,0 +1,14 @@
+release/categories.o
+release/customer.o
+release/employees.o
+release/order.o
+release/orderdetails.o
+release/products.o
+release/shipper.o
+release/soldproduct.o
+release/supplier.o
+release/main.o
+release/mainwindow.o
+release/table.o
+release/moc_mainwindow.o
+release/moc_table.o

@@ -1,0 +1,14 @@
+debug/categories.o
+debug/customer.o
+debug/employees.o
+debug/order.o
+debug/orderdetails.o
+debug/products.o
+debug/shipper.o
+debug/soldproduct.o
+debug/supplier.o
+debug/main.o
+debug/mainwindow.o
+debug/table.o
+debug/moc_mainwindow.o
+debug/moc_table.o
