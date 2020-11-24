@@ -84,7 +84,7 @@ int TableHelper::RemoveFromTable(int ID, QString prmKey ){
     return 0;
 }
 
-TableData TableHelper::filterByValue(QString Col, QVariant Value){
+TableData TableHelper::FilterByValue(QString Col, QVariant Value){
     TableData data;
     QSqlQuery qry;
     prepareSelectQuery(qry, Col, Value);    // prepare query;
@@ -100,7 +100,7 @@ TableData TableHelper::filterByValue(QString Col, QVariant Value){
     return data;
 };
 
-TableData TableHelper::filterByRange(QString Col, QVariant Lower, QVariant Upper){
+TableData TableHelper::FilterByRange(QString Col, QVariant Lower, QVariant Upper){
     TableData data;
     QSqlQuery qry;
     prepareSelectQuery(qry, Col, Lower, Upper);
@@ -153,36 +153,21 @@ void TableHelper::prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Value
 };
 
 void TableHelper::prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Lower, QVariant Upper){
-    // Create a String in format " COL1, COL2, COL3, ..."
+    // Clear a String in format " COL1, COL2, COL3, ..."
     QString colList = "";
     for(auto i = _FieldName.begin(); i !=_FieldName.end(); ++i){
         colList += QString(" %1,").arg(*i);
     }
     colList.chop(1); // remove the last ',' letter
-    if(Lower.isNull() && Upper.isNull()){
-        qry.prepare(QString("SELECT %1 FROM %2").arg(colList, _Name));
-        return;
-    }
-    bool low = true, high = true; // use to decide to bind value or not;
-    QString whereClause;
-    if(Lower.isNull()){
-        whereClause = "WHERE %3 >= ?";
-        low = false;                    // no lower limit
-    }else if (Upper.isNull()){
-        whereClause = "WHERE %3 <= ?";
-        high = false;                   // no upper limit
-    }else{
-        whereClause = "WHERE %3 BETWEEN ? AND ?";
-    }
-    qry.prepare(QString("SELECT %1 FROM %2 ").arg(colList, _Name, whereClause));
+    qry.prepare(QString("SELECT %1 FROM %2 WHERE %3 BETWEEN ? AND ?").arg(colList, _Name, Col));
     switch (checkType(_Info[Col][0].toString())) { // convert to true type;
     case INT:
-        if(low) qry.bindValue(0, Lower.toInt()); // bind if have lower limit
-        if(high)qry.bindValue(1, Upper.toInt()); // bind if have upper limit
+        qry.bindValue(0, Lower.toInt());
+        qry.bindValue(1, Upper.toInt());
         break;
     case REAL:
-        if(low) qry.bindValue(0, Lower.toDouble());
-        if(high)qry.bindValue(1, Upper.toDouble());
+        qry.bindValue(0, Lower.toDouble());
+        qry.bindValue(1, Upper.toDouble());
         break;
     default: // can't compare;
         break;
@@ -196,11 +181,14 @@ void TableHelper::setFieldNameFromInfo(){
         _FieldName.push_back(i.key());
     }
 }
+ColType checkType(QString typeStr){
+    if(typeStr == "INTERGER") return INT;
+    if(typeStr == "REAL") return REAL;
+    if(typeStr == "TEXT") return TEXT;
+    return UNKNOWN;
+}
 
-TableData TableHelper::getFullData(){
-    QVariant x, y;
-    return filterByRange(_PrimaryCol, x, y);
+QString quoteSql(QString& orgStr) {
+    return QString("'%1'").arg(orgStr);
 };
-
-
 

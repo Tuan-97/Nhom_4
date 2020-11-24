@@ -16,17 +16,18 @@ int Table::updateRow(Row& mRow){
         _Data[key] = mRow;
         return 0;
     }
-    _Helper.UpdateRow(mRow);
+    _Helper.UpdateRow(mRow)
     return 1;
 }
 const QString& Table::getTableName(){
     return _Name;
 };
 
-TableData Table::filterByValue(QString Col, QVariant Value) {
+const TableData Table::filterByValue(QString Col, QVariant Value) const{
     return _Helper.filterByValue(Col, Value);
 }
-TableData Table::filterByRange(QString Col, QVariant Lower, QVariant Upper) {
+
+const TableData& Table::filterByRange(QString Col, QVariant Lower, QVariant Upper) const{
     return _Helper.filterByRange(Col, Lower, Upper);
 };
 
