@@ -8,6 +8,7 @@ public:
     //TableManagement(); use default constructor;
     Table& getTable(QString);
     int createTable(QString);
+    int updateTable(Table*);
 private:
     TableList _TableList;
     QSqlQuery& _Query;
@@ -16,3 +17,4 @@ private:
 };
 
 #endif // TABLEMANAGEMENT_H
+

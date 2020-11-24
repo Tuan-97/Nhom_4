@@ -8,13 +8,13 @@
 #include <QString>
 #include <vector>
 #include <map>
+
+class Table;
 typedef QMap<QString, QVariant>     Row;
 typedef QMap<unsigned int, Row>     TableData;          //  just use int;
 typedef QSet<unsigned int>          PrimaryValueList;
-typedef QMap<QString, std::vector<QVariant>>      TableInfo;
-
-
-
+typedef QMap<QString, std::vector<QVariant>>      TableInfo; // by order: type, nullable, PK
+typedef QMap<QString, Table*>        TableList;
 
 class Table : public QObject
 {
@@ -45,6 +45,6 @@ protected:
 
 };
 
-typedef QMap<QString, Table*>        TableList;
+
 
 #endif // TABLE_H
