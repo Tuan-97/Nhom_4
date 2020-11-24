@@ -1,9 +1,37 @@
+#include <QCoreApplication>
+#include <QtSql>
+#include <QSqlDatabase>
+#include <QSql>
+#include <QSqlError>
+#include <QDir>
+#include <QFile>
+#include <QDebug>
+#include <QSqlQuery>
+#include <QString>
+#include <iostream>
+#include <fstream>
+#include <string>
+
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include "Extern_Variables.h"
+#include "date.h"
+#include "table.h"
+//#include "TableManagement.h"
+#include "ProceduceCustomer.h"
+#include "proceduceproduct.h"
 
 map <int, SoldProduct> Product_Sold;
 int SoldProductID = 0;
+
+Table TableCustomer("Customer");
+Table TableCategories("Categories");
+Table TableEmployees("Employees");
+Table TableOrderDetails("OrderDetails");
+Table TableOrders("Order");
+Table TableProducts("Products");
+Table TableShippers("Shippers");
+Table TableSuppliers("Suppliers");
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -147,8 +175,119 @@ void MainWindow::on_DoneOrder_clicked()
 
 void MainWindow::on_Try_clicked()
 {
-    /*QString i = QString::fromStdString(Category_Buy[0].Get_Name());
-    ui->Try_In->setText(i);
-    QString j = QString::fromStdString(Category_Buy[1].Get_Name());
-    ui->Try_Out->setText(j);*/
+}
+
+void MainWindow::on_Change_12_clicked()
+{
+}
+
+void MainWindow::on_Delete_clicked()
+{
+    int id = ui->CustomerID_2->text().toInt();
+
+    ProceduceCustomer del;
+    del.DeleteData(&TableCustomer, id);
+
+
+}
+
+void MainWindow::on_Delete_6_clicked()
+{
+}
+
+void MainWindow::on_Change_clicked()
+{
+    int id = ui->CustomerID_2->text().toInt();
+
+    string name = ui->CustomerID_3->text().toStdString();
+    string contact = ui->CustomerID_4->text().toStdString();
+    string address = ui->CustomerID_5->text().toStdString();
+    string postalcode = ui->CustomerID_5->text().toStdString();
+    string country = ui->CustomerID_8->text().toStdString();
+    string city = ui->CustomerID_7->text().toStdString();
+
+    ProceduceCustomer update;
+    update.AddData(&TableCustomer, id, name, contact, address, postalcode, country, city);
+
+}
+
+void MainWindow::on_Add_clicked()
+{
+    int id = ui->CustomerID_2->text().toInt();
+    string name = ui->CustomerID_3->text().toStdString();
+    string contact = ui->CustomerID_4->text().toStdString();
+    string address = ui->CustomerID_5->text().toStdString();
+    string postalcode = ui->CustomerID_5->text().toStdString();
+    string country = ui->CustomerID_8->text().toStdString();
+    string city = ui->CustomerID_7->text().toStdString();
+
+    ProceduceCustomer add;
+    add.AddData(&TableCustomer, id, name, contact, address, postalcode, country, city);
+}
+
+void MainWindow::on_ReportStoreWeek_clicked()
+{
+
+}
+
+void MainWindow::on_Store_clicked()
+{
+    StoreData("data.db", "StoreData/data.db");
+}
+
+void MainWindow::on_Change_4_clicked()
+{
+
+}
+
+void MainWindow::on_Store_2_clicked()
+{
+    QString whatfind = QString::fromStdString(ui->comboBox->currentText().toStdString());
+    QVariant value = ui->lineEdit_3->text();
+
+    ProceduceProduct report;
+
+    QString temp = report.PrintfReport(whatfind, value, TableProducts);
+
+    ui->lineEdit->setText(temp);
+}
+
+void MainWindow::on_FakeData_clicked()
+{
+    Row temp;
+    temp.insert("ProductName","Chais");
+    temp.insert("SupplierID",1);
+    temp.insert("CategoryID",1);
+    temp.insert("Unit","10 boxes x 20 bags");
+    temp.insert("Price",18);
+    TableProducts._Data.insert(1, temp);
+    //TableProducts.insert(1, temp);
+    temp.clear();
+
+    temp.insert("ProductName","Chang");
+    temp.insert("SupplierID",1);
+    temp.insert("CategoryID",1);
+    temp.insert("Unit","24 - 12 oz bottles");
+    temp.insert("Price",19);
+    TableProducts._Data.insert(2, temp);
+    //TableProducts.insertRow(temp);
+    temp.clear();
+
+    temp.insert("ProductName","Aniseed Syrup");
+    temp.insert("SupplierID",1);
+    temp.insert("CategoryID",2);
+    temp.insert("Unit","12 - 550 ml bottles");
+    temp.insert("Price",10);
+    TableProducts._Data.insert(3, temp);
+    //TableProducts.insertRow(temp);
+    temp.clear();
+
+    temp.insert("ProductName","Chef Anton's Cajun Seasoning");
+    temp.insert("SupplierID",2);
+    temp.insert("CategoryID",2);
+    temp.insert("Unit","48 - 6 oz jars");
+    temp.insert("Price",22);
+    TableProducts._Data.insert(4, temp);
+    //TableProducts.insertRow(temp);
+    temp.clear();
 }
