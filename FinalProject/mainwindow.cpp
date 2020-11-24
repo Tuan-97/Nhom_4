@@ -2,24 +2,8 @@
 #include "ui_mainwindow.h"
 #include "Extern_Variables.h"
 
-/*#include "Class/soldproduct.h"
-#include "Class/categories.h"
-#include "Class/customer.h"
-#include "Class/employees.h"
-#include "Class/order.h"
-#include "Class/orderdetails.h"
-#include "Class/products.h"
-#include "Class/shipper.h"
-#include "Class/supplier.h"*/
-
-vector <SoldProduct> Product_Sold;
-vector <Categories> Category_Buy;
-vector <Customer> Customer_Buy;
-vector <Order> Order_Buy;
-vector <OrderDetails> OrderDetails_Buy;
-vector <Products> Products_Buy;
-vector <Shipper> Shipper_Buy;
-vector <Supplier> Supplier_Buy;
+map <int, SoldProduct> Product_Sold;
+int SoldProductID = 0;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -105,8 +89,6 @@ MainWindow::MainWindow(QWidget *parent)
     ui->ProductName->addItem("Rhönbräu Klosterbier");
     ui->ProductName->addItem("Lakkalikööri");
     ui->ProductName->addItem("Original Frankfurter grüne Soße");
-
-    Category_Buy = GetDataBase();
 }
 
 MainWindow::~MainWindow()
@@ -114,33 +96,47 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+SoldProduct Order_Temp;
 
 void MainWindow::on_CreateOrder_clicked()
 {
-    SoldProduct temp(ui->CustomerID->text().toInt(), ui->Date->text().toStdString());
-    Product_Sold.push_back(temp);
+    int date = convertdate(ui->Date->text().toStdString());
+    Order_Temp.SetOrder(ui->CustomerID->text().toInt(), date);
 }
 
 void MainWindow::on_AddProduct_clicked()
 {
-    unsigned long last_element = (unsigned long)Product_Sold.size();
     string name = ui->ProductName->currentText().toStdString();
     int quantity = ui->Quantity->text().toInt();
     double price = ui->Price->text().toDouble();
-    Product_Sold[last_element-1].AddProduct(name, quantity, price);
+
+    //Add Product chosen into object Order_Temp;
+    Order_Temp.AddProduct(name, quantity, price);
+
+    // clear editLine Name, Quantity, Price, Original Price of Product
     ui->ProductName->clear();
     ui->Quantity->clear();
     ui->Price->clear();
     ui->OriginalPrice->clear();
 }
 
-void MainWindow::on_CreateOrder_2_clicked()
+void MainWindow::on_DoneOrder_clicked()
 {
-    unsigned long last_element = (unsigned long)Product_Sold.size();
     string name = ui->ProductName->currentText().toStdString();
     int quantity = ui->Quantity->text().toInt();
     double price = ui->Price->text().toDouble();
-    Product_Sold[last_element-1].AddProduct(name, quantity, price);
+
+    //Add Product chosen into object Order_Temp;
+    Order_Temp.AddProduct(name, quantity, price);
+
+    //Insert a element of map Product_Sold which has first key was SoldProductID
+    //and second key was an object Order_Temp of class SoldProduct
+    Product_Sold.insert(make_pair(SoldProductID, Order_Temp));
+
+    //Increae first key SoldProductID for next element of map Product_Sold
+    SoldProductID++;
+
+    // clear editLine Name, Quantity, Price, Original Price of Product, Customer ID and Date of OrderSold
     ui->ProductName->clear();
     ui->Quantity->clear();
     ui->Price->clear();
@@ -151,8 +147,8 @@ void MainWindow::on_CreateOrder_2_clicked()
 
 void MainWindow::on_Try_clicked()
 {
-    QString i = QString::fromStdString(Category_Buy[0].Get_Name());
+    /*QString i = QString::fromStdString(Category_Buy[0].Get_Name());
     ui->Try_In->setText(i);
     QString j = QString::fromStdString(Category_Buy[1].Get_Name());
-    ui->Try_Out->setText(j);
+    ui->Try_Out->setText(j);*/
 }

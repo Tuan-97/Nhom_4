@@ -2,6 +2,7 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <string>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -15,12 +16,14 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    int convertdate(std::string);
+
 private slots:
     void on_CreateOrder_clicked();
 
     void on_AddProduct_clicked();
 
-    void on_CreateOrder_2_clicked();
+    void on_DoneOrder_clicked();
 
     void on_Try_clicked();
 
