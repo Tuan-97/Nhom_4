@@ -1,7 +1,9 @@
 #include "table.h"
 #include <QDebug>
 int Table::insertRow(Row& newRow){
-    _Helper.Insert(newRow);
+    if(_Helper.Insert(newRow)){
+       return 1;
+    }
     _Data[newRow[_PrmField].toInt()] = newRow;
     return 0;
 }

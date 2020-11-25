@@ -49,6 +49,7 @@ int TableHelper::UpdateRow(Row& row){
     //ColType type
     for(auto i = _FieldName.begin(); i !=_FieldName.end(); ++i){
         if (*i == _PrimaryCol) continue;
+
         updateStr += QString(" %1 = %2,").arg(*i,"?");
     }
     updateStr.chop(1);
@@ -60,9 +61,6 @@ int TableHelper::UpdateRow(Row& row){
     int i = 0;
     for(auto field = _FieldName.begin(); field != _FieldName.end(); field++){
         if (*field == _PrimaryCol) continue;
-        if(*field == "PostalCode"){
-            qDebug() << row[*field].toString();
-        }
 
         switch (checkType(_Info[*field][0].toString())) {
         case INT:
@@ -73,16 +71,15 @@ int TableHelper::UpdateRow(Row& row){
             break;
         case TEXT:
             qry.bindValue(i, quoteSql(row[*field].toString()));
-
-
+            qDebug() << i;
             break;
         default:
-
+            qDebug() << "default";
             break;
         }
         i++;
     }
-
+    qDebug() << i;
     qry.bindValue(i, ID);
     qry.exec();
     qDebug() << qry.lastError();
@@ -147,7 +144,6 @@ TableInfo TableHelper::getInfo(QString TableName){
     // cid, name (column's name), type, notnull, dflt_value, pk (primarykey)
     // only get name, type, notnull and pk. Name is used as key in map, the rest
     // are put into a vector;
-    qDebug() << qry.lastError();
     while(qry.next()){
         Info[qry.value(1).toString()]
                 = std::vector<QVariant>({qry.value(2), qry.value(3), qry.value(5)});
@@ -158,13 +154,12 @@ TableInfo TableHelper::getInfo(QString TableName){
 void TableHelper::prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Value){
     // Clear a String in format " COL1, COL2, COL3, ..."
     QString colList = "";
-    qDebug() << _Info.size();
+
     for(auto i = _FieldName.begin(); i !=_FieldName.end(); ++i){
         colList += QString(" %1,").arg(*i);
     }
     colList.chop(1); // remove the last , letter
-    //qDebug() << colList;
-    qDebug() << QString("SELECT %1 FROM %2 WHERE %3 = ?").arg(colList, _Name, Col);
+
     qry.prepare(QString("SELECT %1 FROM %2 WHERE %3 = ?").arg(colList, _Name, Col));
     switch (checkType(_Info[Col][0].toString())) { // convert to true type;
     case INT:
