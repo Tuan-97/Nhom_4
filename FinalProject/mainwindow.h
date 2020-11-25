@@ -1,6 +1,6 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
-
+#include "table.h"
 #include <QMainWindow>
 #include <string>
 
@@ -15,7 +15,14 @@ class MainWindow : public QMainWindow
 public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
-
+    Table TableCustomer;
+    Table TableCategories;
+    Table TableEmployees;
+    Table TableOrderDetails;
+    Table TableOrders;
+    Table TableProducts;
+    Table TableShippers;
+    Table TableSuppliers;
 private slots:
     void on_CreateOrder_clicked();
 
@@ -43,7 +50,11 @@ private slots:
 
     void on_Store_2_clicked();
 
-    void on_FakeData_clicked();
+    void on_Store_3_clicked();
+
+    void on_Change_9_clicked();
+
+    void on_Add_4_clicked();
 
 private:
     Ui::MainWindow *ui;

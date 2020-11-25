@@ -6,7 +6,7 @@ int Table::insertRow(Row& newRow){
     return 0;
 }
 int Table::removeRow(int key){
-    _Helper.RemoveFromTable(key, _PrmField);
+    _Helper.RemoveFromTable(key);
     _Data.remove(key);
     return 0;
 }

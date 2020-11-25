@@ -26,6 +26,8 @@ public:
     void UpdateData(Table*, int, string, string, string, string, string , string);
     void AddData(Table*, int, string, string, string, string, string, string);
     void DeleteData(Table*, int);
+
+    QString PrintfReport(int, Table);
 };
 
 #endif // PROCEDUCE_H

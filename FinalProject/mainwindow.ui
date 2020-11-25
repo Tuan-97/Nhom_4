@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1319</width>
-    <height>615</height>
+    <height>721</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -61,7 +61,7 @@
    <widget class="QPushButton" name="CreateOrder">
     <property name="geometry">
      <rect>
-      <x>250</x>
+      <x>260</x>
       <y>50</y>
       <width>93</width>
       <height>71</height>
@@ -71,20 +71,10 @@
      <string>Create Order</string>
     </property>
    </widget>
-   <widget class="QComboBox" name="ProductName">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>150</y>
-      <width>191</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
    <widget class="QPushButton" name="DoneOrder">
     <property name="geometry">
      <rect>
-      <x>20</x>
+      <x>10</x>
       <y>250</y>
       <width>701</width>
       <height>41</height>
@@ -92,63 +82,6 @@
     </property>
     <property name="text">
      <string>Done Order!</string>
-    </property>
-   </widget>
-   <widget class="QWidget" name="layoutWidget_3">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>200</y>
-      <width>217</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_4">
-     <item>
-      <widget class="QLabel" name="label_4">
-       <property name="text">
-        <string>Price</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="Price"/>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QWidget" name="layoutWidget_4">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>70</y>
-      <width>217</width>
-      <height>24</height>
-     </rect>
-    </property>
-    <layout class="QHBoxLayout" name="horizontalLayout_5">
-     <item>
-      <widget class="QLabel" name="label_5">
-       <property name="text">
-        <string>Original Price</string>
-       </property>
-      </widget>
-     </item>
-     <item>
-      <widget class="QLineEdit" name="OriginalPrice"/>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QPushButton" name="Original_Price">
-    <property name="geometry">
-     <rect>
-      <x>510</x>
-      <y>120</y>
-      <width>211</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Show Original Price</string>
     </property>
    </widget>
    <widget class="QPushButton" name="AddProduct">
@@ -199,30 +132,17 @@
      </item>
     </layout>
    </widget>
-   <widget class="QPushButton" name="ReportStoreWeek">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>350</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Report Storage Week</string>
-    </property>
-   </widget>
    <widget class="QTabWidget" name="tabWidget">
     <property name="geometry">
      <rect>
-      <x>240</x>
-      <y>330</y>
+      <x>20</x>
+      <y>320</y>
       <width>701</width>
       <height>281</height>
      </rect>
     </property>
     <property name="currentIndex">
-     <number>0</number>
+     <number>3</number>
     </property>
     <widget class="QWidget" name="tab">
      <attribute name="title">
@@ -1523,19 +1443,6 @@
      </widget>
     </widget>
    </widget>
-   <widget class="QPushButton" name="ReportSoldWeek">
-    <property name="geometry">
-     <rect>
-      <x>30</x>
-      <y>420</y>
-      <width>161</width>
-      <height>51</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Report Sold Week</string>
-    </property>
-   </widget>
    <widget class="QPushButton" name="Restore">
     <property name="geometry">
      <rect>
@@ -1553,7 +1460,7 @@
     <property name="geometry">
      <rect>
       <x>990</x>
-      <y>170</y>
+      <y>290</y>
       <width>301</width>
       <height>231</height>
      </rect>
@@ -1627,17 +1534,188 @@
      </property>
     </item>
    </widget>
-   <widget class="QPushButton" name="FakeData">
+   <widget class="QLineEdit" name="lineEdit_4">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>480</y>
-      <width>181</width>
-      <height>61</height>
+      <x>1010</x>
+      <y>240</y>
+      <width>137</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton">
+    <property name="geometry">
+     <rect>
+      <x>1030</x>
+      <y>170</y>
+      <width>95</width>
+      <height>20</height>
      </rect>
     </property>
     <property name="text">
-     <string>Fake Data</string>
+     <string>Find Product</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_2">
+    <property name="geometry">
+     <rect>
+      <x>1030</x>
+      <y>200</y>
+      <width>95</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Find Date</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_5">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>240</y>
+      <width>137</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="Store_3">
+    <property name="geometry">
+     <rect>
+      <x>970</x>
+      <y>540</y>
+      <width>101</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Test</string>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_6">
+    <property name="geometry">
+     <rect>
+      <x>1090</x>
+      <y>540</y>
+      <width>137</width>
+      <height>22</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QLineEdit" name="lineEdit_2">
+    <property name="geometry">
+     <rect>
+      <x>980</x>
+      <y>580</y>
+      <width>211</width>
+      <height>81</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>100</y>
+      <width>217</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_5">
+     <item>
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>Employee ID</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="Employee"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_12">
+    <property name="geometry">
+     <rect>
+      <x>380</x>
+      <y>50</y>
+      <width>217</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_13">
+     <item>
+      <widget class="QLabel" name="label_13">
+       <property name="text">
+        <string>Shipper ID</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="Shipper"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QWidget" name="layoutWidget_13">
+    <property name="geometry">
+     <rect>
+      <x>10</x>
+      <y>150</y>
+      <width>217</width>
+      <height>24</height>
+     </rect>
+    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout_14">
+     <item>
+      <widget class="QLabel" name="label_14">
+       <property name="text">
+        <string>Product ID</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLineEdit" name="ProductID"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_3">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>580</y>
+      <width>95</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Order</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="Customer">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>550</y>
+      <width>95</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Customer</string>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_4">
+    <property name="geometry">
+     <rect>
+      <x>860</x>
+      <y>610</y>
+      <width>95</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>OrderDetails</string>
     </property>
    </widget>
   </widget>

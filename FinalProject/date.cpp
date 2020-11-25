@@ -37,6 +37,11 @@ std::string convertime(int time){
     return (day+"/"+month+"/"+year);
 }
 
+/*
+ * Use to copy data file into a separate director to restore later
+ * Author: Ho Le Nhu Duen
+ */
+
 int StoreData(string from, string to){
     try{
         ifstream in(from);

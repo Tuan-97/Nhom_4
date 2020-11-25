@@ -23,6 +23,8 @@ SOURCES += \
     date.cpp \
     main.cpp \
     mainwindow.cpp \
+    proceduceorder.cpp \
+    proceduceorderdetails.cpp \
     proceduceproduct.cpp \
     table.cpp
 
@@ -35,6 +37,8 @@ HEADERS += \
     Util.h \
     date.h \
     mainwindow.h \
+    proceduceorder.h \
+    proceduceorderdetails.h \
     proceduceproduct.h \
     table.h
 
