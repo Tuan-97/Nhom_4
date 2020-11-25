@@ -187,7 +187,7 @@ void TableHelper::prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Lower
         return;
     }
     bool low = true, high = true; // use to decide to bind value or not;
-    int posH = 0; //
+    int posH = 0; // change index when binding depend on different cases
 
     QString whereClause;
     if(Lower.isNull()){
@@ -204,17 +204,12 @@ void TableHelper::prepareSelectQuery(QSqlQuery& qry, QString Col, QVariant Lower
     qry.prepare(QString("SELECT %1 FROM %2 %3").arg(colList, _Name, whereClause));
     switch (Type) { // convert to true type;
     case INT:
-        if(low)
-            qry.bindValue(0, Lower.toInt());
-        if(high)
-            qry.bindValue(posH, Upper.toInt()); // bind if have upper limit
+        if(low) qry.bindValue(0, Lower.toInt());
+        if(high)qry.bindValue(posH, Upper.toInt()); // bind if have upper limit
         break;
     case REAL:
-        if(low)
-            qry.bindValue(0, Lower.toDouble());
-
-        if(high)
-            qry.bindValue(posH, Upper.toDouble());; // bind if have upper limit
+        if(low) qry.bindValue(0, Lower.toDouble());
+        if(high)qry.bindValue(posH, Upper.toDouble());; // bind if have upper limit
         break;
     default: // can't compare;
 
@@ -243,3 +238,35 @@ QString TableHelper::setPrmCol(){
     return "";  // should never reach here
 }
 
+QVariant TableHelper::getSumOfCol(QString Col , QVariant Lower, QVariant Upper){
+    QSqlQuery qry;
+    bool low = true, high = true; // use to decide to bind value or not;
+    int posH = 0;
+
+
+    QString whereClause;
+    if(Lower.isNull()){
+        whereClause = QString("WHERE %3 >= ?").arg(Col);
+        low = false;  posH =0;                  // no lower limit
+    }else if (Upper.isNull()){
+        whereClause = QString("WHERE %3 <= ?").arg(Col);
+        high = false;                   // no upper limit
+    }else{
+        whereClause = QString("WHERE %3 BETWEEN ? AND ?").arg(Col);
+        posH = 1;
+    }
+    qry.prepare(QString("SELECT SUM(%1) FROM %2 WHERE %3").arg(Col, _Name, whereClause));
+    switch (checkType(_Info[Col][0].toString())){
+    case INT:
+        if(low) qry.bindValue(0, Lower.toInt());
+        if(high)qry.bindValue(posH, Upper.toInt()); // bind if have upper limit
+        break;
+    case REAL:
+        if(low) qry.bindValue(0, Lower.toDouble());
+        if(high)qry.bindValue(posH, Upper.toDouble());; // bind if have upper limit
+        break;
+    default:
+        break;
+    }
+    return qry.value(0);
+}
