@@ -17,7 +17,7 @@ public:
     TableData filterByRange(QString, QVariant, QVariant);  // WHERE QString >= LowerBound AND QString <= Upper Bound
                                                                                 // May have function to make closed set an open set
                                                                                 // There is no clopen set
-public:
+    private:
     TableHelper         _Helper;
     QString             _Name;          // Table Name;
     TableData           _Data;          // Data get from database

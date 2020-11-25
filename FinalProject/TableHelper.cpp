@@ -63,7 +63,6 @@ int TableHelper::UpdateRow(Row& row){
         if(*field == "PostalCode"){
             qDebug() << row[*field].toString();
         }
-            ;
 
         switch (checkType(_Info[*field][0].toString())) {
         case INT:

@@ -179,7 +179,7 @@ void MainWindow::on_Store_2_clicked()
     QString temp = "";
     ProceduceProduct reportproduct;
     ProceduceOrder reportorder;
-    qDebug() << ui->radioButton_2->isCheckable();
+
     if(ui->radioButton->isChecked()){
 
         QString whatfind = QString::fromStdString(ui->comboBox->currentText().toStdString());
@@ -199,7 +199,7 @@ void MainWindow::on_Store_2_clicked()
 
 void MainWindow::on_Store_3_clicked()
 {
-    if(ui->Customer->isChecked()){
+    /*if(ui->Customer->isChecked()){
         ProceduceCustomer customer;
         int id = ui->lineEdit_6->text().toInt();
         QString temp = customer.PrintfReport(id, TableCustomer);
@@ -214,7 +214,12 @@ void MainWindow::on_Store_3_clicked()
         int id = ui->lineEdit_6->text().toInt();
         QString temp = orderdetails.PrintfReport(id, TableOrderDetails);
         ui->lineEdit_2->setText(temp);
-    }
+    }*/
+
+    ProceduceCustomer customer;
+    int id = ui->lineEdit_6->text().toInt();
+    QString temp = customer.PrintfReport(id, TableCustomer);
+    ui->lineEdit_2->setText(temp);
 }
 
 void MainWindow::on_Change_9_clicked()
